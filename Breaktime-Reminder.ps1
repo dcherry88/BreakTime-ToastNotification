@@ -6,14 +6,15 @@
 
 
 #>
-
-$HeroImage = "$psscriptroot\breaktime.jpg"
+$invocation = (Get-Variable MyInvocation).Value
+$directorypath = Split-Path $invocation.MyCommand.Path
 #Set your work hours here
 $StartTime = '08:00'
 $EndTime = '17:00'
 #######################
+$currentday = get-date -UFormat %A
 $currentTime = Get-date -format "HH:mm"
-if(($currentTime -gt $starttime) -and ($currentTime -lt $endtime)){
+if(($currentTime -gt $starttime) -and ($currentTime -lt $endtime) -and ($currentday -ne "Saturday") -and ($currentday -ne "Sunday")){
     # Register the AppID in the registry for use with the Action Center, if required
     $RegPath = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings"
     $App =  "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe"
@@ -35,8 +36,6 @@ if(($currentTime -gt $starttime) -and ($currentTime -lt $endtime)){
 <toast scenario="Reminder">
     <visual>
     <binding template="ToastGeneric">
-        <image placement="hero" src="$HeroImage"/>
-        <image id="1" placement="appLogoOverride" hint-crop="circle" src=""/>
         <text placement="attribution">Breaktime Reminder</text>
         <text></text>
         <group>

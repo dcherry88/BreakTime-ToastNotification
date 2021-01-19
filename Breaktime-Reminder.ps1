@@ -51,7 +51,7 @@ if(($currentTime -gt $starttime) -and ($currentTime -lt $endtime) -and ($current
             <selection id="15" content="15 minutes"/>
             <selection id="30" content="30 minutes"/>
         </input>
-        <action activationType="protocol" arguments="" content="BREAK!" />
+        <action activationType="system" arguments="dismiss" content="BREAK!" />
         <action activationType="system" arguments="snooze" hint-inputId="snoozeTime" content="Snooze"/>
     </actions>
 </toast>
